@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MemeCreator</string>
+    <string name="browse_title">Videos by Your Company</string>
+    <string name="related_movies">Related Videos</string>
+    <string name="grid_view">Grid View</string>
+    <string name="error_fragment">Error Fragment</string>
+    <string name="personal_settings">Personal Settings</string>
+    <string name="watch_trailer_1">Watch trailer</string>
+    <string name="movie">Movie</string>
+
+    <string name="business">Business</string>
+    <string name="marketplace">Market Place</string>
+    <string name="cash_distributed">Cash Distributed</string>
+    <string name="cash_returned">Cash Returned</string>
+    <string name="cash_to_collect">Cash to Collect</string>
+    <string name="purchases">Purchases</string>
+    <string name="sales">Sales</string>
+    <string name="expenses">Expenses</string>
+    <string name="financial_overview">Financial Overview</string>
+</resources>
