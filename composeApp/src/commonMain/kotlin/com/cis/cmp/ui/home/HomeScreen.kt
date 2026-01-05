@@ -44,6 +44,7 @@ import cmp.composeapp.generated.resources.business
 import cmp.composeapp.generated.resources.img_horizontal_bar_one_gold
 import cmp.composeapp.generated.resources.img_tab_bg
 import cmp.composeapp.generated.resources.marketplace
+import com.cis.cmp.core.navigation.Routes
 import com.cis.cmp.core.theme.Blue53
 import com.cis.cmp.core.theme.GrayEA
 import com.cis.cmp.core.theme.PrimaryBlue
@@ -99,7 +100,7 @@ fun HomeScreen(
                         }
 
                         MainBottomNavItem.More -> {
-
+                            navController.navigate(Routes.MORE)
                         }
                     }
                     selectedItem = index

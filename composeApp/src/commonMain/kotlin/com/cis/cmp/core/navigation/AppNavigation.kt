@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.cis.cmp.ui.splash.SplashScreen
 import com.cis.cmp.ui.authentication.LoginScreen
 import com.cis.cmp.ui.home.HomeScreen
+import com.cis.cmp.ui.more.MoreScreen
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -36,6 +37,10 @@ fun AppNavigation() {
 
         composable(Routes.HOME) {
             HomeScreen(navController)
+        }
+
+        composable(Routes.MORE) {
+            MoreScreen(navController)
         }
     }
 }

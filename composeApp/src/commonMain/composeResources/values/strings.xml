@@ -17,4 +17,5 @@
     <string name="sales">Sales</string>
     <string name="expenses">Expenses</string>
     <string name="financial_overview">Financial Overview</string>
+    <string name="more">More</string>
 </resources>

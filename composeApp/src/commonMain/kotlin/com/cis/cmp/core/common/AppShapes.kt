@@ -3,8 +3,10 @@ package com.cis.cmp.core.common
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
@@ -36,11 +38,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import cmp.composeapp.generated.resources.Res
+import cmp.composeapp.generated.resources.icon_back_arrow
 import com.cis.cmp.core.theme.Black38
 import com.cis.cmp.core.theme.Blue53
 import com.cis.cmp.core.theme.Fonts.NotoSans
@@ -48,7 +53,38 @@ import com.cis.cmp.core.theme.Gray7D
 import com.cis.cmp.core.theme.Red2F
 import com.cis.cmp.core.theme.White
 import com.cis.cmp.core.common.BarOneExtension.customGradientBackground
+import org.jetbrains.compose.resources.painterResource
 
+@Composable
+fun BackTopAppBar(
+    title: String = "",
+    onBack: () -> Unit
+) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterStart)
+                .clickable { onBack() }, contentAlignment = Alignment.Center
+        ) {
+            Image(
+                painter = painterResource(Res.drawable.icon_back_arrow),
+                contentDescription = "icon_back",
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        Spacer(modifier = Modifier.height(8.dp))
+
+        // Title
+        TextMedium(
+            title, size = 18, color = White
+        )
+    }
+}
 
 @Composable
 fun TextSmall(text: String, modifier: Modifier = Modifier, color: Color = Blue53, size: Int = 12) {
