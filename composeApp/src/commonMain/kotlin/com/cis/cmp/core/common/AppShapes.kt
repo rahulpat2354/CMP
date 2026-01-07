@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
@@ -45,10 +46,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cmp.composeapp.generated.resources.Res
+import cmp.composeapp.generated.resources.bg_back_btn
+import cmp.composeapp.generated.resources.icon_back
 import cmp.composeapp.generated.resources.icon_back_arrow
+import cmp.composeapp.generated.resources.img_screen_bg
 import com.cis.cmp.core.theme.Black38
 import com.cis.cmp.core.theme.Blue53
-import com.cis.cmp.core.theme.Fonts.NotoSans
+import com.cis.cmp.core.theme.Fonts.Poppins
 import com.cis.cmp.core.theme.Gray7D
 import com.cis.cmp.core.theme.Red2F
 import com.cis.cmp.core.theme.White
@@ -62,18 +66,20 @@ fun BackTopAppBar(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth().padding(horizontal = 16.dp, vertical = 12.dp),
+            .fillMaxWidth().padding(horizontal = 16.dp),
         contentAlignment = Alignment.Center
     ) {
         Box(
             modifier = Modifier
-                .align(Alignment.CenterStart)
+                .align(Alignment.CenterStart).
+                paint(
+                    painter = painterResource(Res.drawable.icon_back),
+                    contentScale = ContentScale.Crop)
                 .clickable { onBack() }, contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(Res.drawable.icon_back_arrow),
                 contentDescription = "icon_back",
-                contentScale = ContentScale.Crop
             )
         }
 
@@ -93,7 +99,7 @@ fun TextSmall(text: String, modifier: Modifier = Modifier, color: Color = Blue53
         modifier = modifier,
         style = TextStyle(
             color = color, fontSize = size.sp,
-            fontFamily = NotoSans,
+            fontFamily = Poppins,
             fontWeight = FontWeight.Normal
         )
     )
@@ -111,7 +117,7 @@ fun TextMedium(
         modifier = modifier,
         style = TextStyle(
             color = color, fontSize = size.sp,
-            fontFamily = NotoSans,
+            fontFamily = Poppins,
             fontWeight = FontWeight.Medium,
         )
     )
@@ -129,7 +135,7 @@ fun TextLarge(
         modifier = modifier,
         style = TextStyle(
             color = color, fontSize = size.sp,
-            fontFamily = NotoSans,
+            fontFamily = Poppins,
             fontWeight = FontWeight.SemiBold,
         )
     )

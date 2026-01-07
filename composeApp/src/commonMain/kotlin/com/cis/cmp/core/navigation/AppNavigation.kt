@@ -8,6 +8,7 @@ import com.cis.cmp.ui.splash.SplashScreen
 import com.cis.cmp.ui.authentication.LoginScreen
 import com.cis.cmp.ui.home.HomeScreen
 import com.cis.cmp.ui.more.MoreScreen
+import com.cis.cmp.ui.more.users.UserListScreen
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -41,6 +42,10 @@ fun AppNavigation() {
 
         composable(Routes.MORE) {
             MoreScreen(navController)
+        }
+
+        composable(Routes.USERLIST) {
+            UserListScreen(navController)
         }
     }
 }

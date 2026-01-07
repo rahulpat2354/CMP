@@ -1,11 +1,17 @@
 package com.cis.cmp
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.layout.ContentScale
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import cmp.composeapp.generated.resources.Res
 import cmp.composeapp.generated.resources.ca
 import cmp.composeapp.generated.resources.gb
+import cmp.composeapp.generated.resources.img_screen_bg
 import cmp.composeapp.generated.resources.jp
 import com.cis.cmp.core.theme.MyAppTheme
 import com.cis.cmp.di.appModules
@@ -15,6 +21,7 @@ import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.painterResource
 import org.koin.compose.KoinApplication
 import kotlin.time.Clock
 import kotlin.time.ExperimentalTime
@@ -26,7 +33,12 @@ fun App(countries: List<Country> = countries()) {
         modules(appModules)
     }) {
         MyAppTheme {
-            AppNavigation()
+            Box(modifier = Modifier.fillMaxSize().paint(
+                painter = painterResource(Res.drawable.img_screen_bg),
+                contentScale = ContentScale.Crop,
+            )){
+                AppNavigation()
+            }
         }
     }
 }

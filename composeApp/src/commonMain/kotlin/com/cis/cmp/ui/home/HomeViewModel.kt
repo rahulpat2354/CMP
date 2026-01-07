@@ -17,7 +17,7 @@ data class HomeUiState(
     val isLoading: Boolean = false,
     val error: String ? = null,
     val userData: LocalUserData? = null,
-    val dashboardOverviewData: MainDashboardResp.MainDashData? = null
+    val dashboardOverviewData: MainDashboardResp.MainDashData? = MainDashboardResp.MainDashData()
 )
 
 class HomeViewModel(val authRepository: AuthRepository, val mainRepository: MainRepository) :

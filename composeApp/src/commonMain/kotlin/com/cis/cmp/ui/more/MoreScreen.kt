@@ -2,6 +2,7 @@ package com.cis.cmp.ui.more
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +37,7 @@ import cmp.composeapp.generated.resources.more
 import com.cis.cmp.core.common.BackTopAppBar
 import com.cis.cmp.core.common.TextMedium
 import com.cis.cmp.core.common.TextSmall
+import com.cis.cmp.core.navigation.Routes
 import com.cis.cmp.core.theme.Blue53
 import com.cis.cmp.core.theme.White20
 import com.cis.cmp.core.theme.White50
@@ -68,19 +70,13 @@ fun MoreScreen(navController: NavController) {
             alignment = Alignment.Center
         )
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState()) // ✅ makes it scrollable
-                .padding(vertical = 15.dp)
-                .imePadding()
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
 
-            Row(Modifier.padding(horizontal = 16.dp)) {
-                BackTopAppBar(stringResource(Res.string.more)) { navController.popBackStack() }
-            }
+            BackTopAppBar(stringResource(Res.string.more)) { navController.popBackStack() }
 
             Spacer(Modifier.height(16.dp))
                 Column(
@@ -92,7 +88,13 @@ fun MoreScreen(navController: NavController) {
                         .padding(10.dp),
                 ) {
                     list.forEachIndexed { index, moreItem ->
-                        MoreItem(moreItem = moreItem)
+                        MoreItem(moreItem = moreItem){
+                            when(moreItem.id){
+//                                0 -> navController.navigate(Routes.ANALYTICS)
+//                                1 -> navController.navigate(Routes.INVENTORY)
+                                2-> navController.navigate(Routes.USERLIST)
+                            }
+                        }
                     }
                 }
         }
@@ -101,10 +103,12 @@ fun MoreScreen(navController: NavController) {
 
 
 @Composable
-fun MoreItem(moreItem: MoreItem) {
+fun MoreItem(moreItem: MoreItem, onClick: () -> Unit) {
     Row(
-        Modifier.padding(horizontal = 16.dp, vertical = 12.dp).fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+        Modifier.padding(horizontal = 16.dp, vertical = 12.dp).fillMaxWidth().clickable(enabled = true){
+            onClick()
+        },
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(moreItem.icon),
