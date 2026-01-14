@@ -71,6 +71,11 @@ kotlin {
 
             // preference
             implementation(libs.multiplatform.settings)
+
+            // file picker
+            implementation(libs.filekit.dialogs)
+            implementation(libs.filekit.dialogs.compose)
+            implementation(libs.filekit.coil)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

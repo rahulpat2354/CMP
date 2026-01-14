@@ -17,6 +17,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -34,6 +39,7 @@ import cmp.composeapp.generated.resources.icon_language
 import cmp.composeapp.generated.resources.img_bar_one_gold
 import cmp.composeapp.generated.resources.img_screen_bg
 import cmp.composeapp.generated.resources.more
+import coil3.compose.AsyncImage
 import com.cis.cmp.core.common.BackTopAppBar
 import com.cis.cmp.core.common.TextMedium
 import com.cis.cmp.core.common.TextSmall
@@ -41,6 +47,13 @@ import com.cis.cmp.core.navigation.Routes
 import com.cis.cmp.core.theme.Blue53
 import com.cis.cmp.core.theme.White20
 import com.cis.cmp.core.theme.White50
+import io.github.vinceglb.filekit.FileKit
+import io.github.vinceglb.filekit.PlatformFile
+import io.github.vinceglb.filekit.dialogs.FileKitMode
+import io.github.vinceglb.filekit.dialogs.FileKitType
+import io.github.vinceglb.filekit.dialogs.compose.rememberFilePickerLauncher
+import io.github.vinceglb.filekit.dialogs.openFilePicker
+import kotlinx.coroutines.coroutineScope
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -62,6 +75,15 @@ fun MoreScreen(navController: NavController) {
         MoreItem(3, "Currency", Res.drawable.ic_price_settings),
         MoreItem(4, "Measurement Unit", Res.drawable.ic_users)
     )
+
+    var selectedImage by remember { mutableStateOf<PlatformFile?>(null) }
+
+    val launcher = rememberFilePickerLauncher(
+        type = FileKitType.Image,
+    ) { image ->
+        // Handle the image
+        selectedImage = image
+    }
 
     Box(
         modifier = Modifier.fillMaxSize().paint(
@@ -91,10 +113,16 @@ fun MoreScreen(navController: NavController) {
                         MoreItem(moreItem = moreItem){
                             when(moreItem.id){
 //                                0 -> navController.navigate(Routes.ANALYTICS)
-//                                1 -> navController.navigate(Routes.INVENTORY)
+                                1 -> {
+                                    launcher.launch()
+                                }
                                 2-> navController.navigate(Routes.USERLIST)
                             }
                         }
+                    }
+
+                    selectedImage?.let {
+                        AsyncImage(model = selectedImage, contentDescription = null, modifier = Modifier.size(100.dp))
                     }
                 }
         }

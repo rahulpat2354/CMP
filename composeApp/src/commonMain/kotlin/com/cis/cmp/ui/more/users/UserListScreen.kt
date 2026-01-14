@@ -3,6 +3,7 @@ package com.cis.cmp.ui.more.users
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -54,6 +56,7 @@ import cmp.composeapp.generated.resources.users
 import com.cis.cmp.core.common.BackTopAppBar
 import com.cis.cmp.core.common.TextMedium
 import com.cis.cmp.core.common.TextSmall
+import com.cis.cmp.core.navigation.Routes
 import com.cis.cmp.core.theme.Black2A
 import com.cis.cmp.core.theme.Blue53
 import com.cis.cmp.core.theme.Blue72
@@ -108,6 +111,8 @@ fun UserListScreen(navController: NavController) {
     val pagerState = rememberPagerState(initialPage = 0) { tabs.size }
     val scope = rememberCoroutineScope()
 
+    val sampleData = sampleUserData()
+
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -126,16 +131,18 @@ fun UserListScreen(navController: NavController) {
 
             HorizontalPager(
                 state = pagerState,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.Top
             ) {
                 LazyColumn(
                     modifier = Modifier.fillMaxWidth(),
                     verticalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    items(sampleUserData(), key = { it.id }) { user ->
+                    items(sampleData, key = { it.id }) { user ->
                         UserItemUi(
                             user
-                        )
+                        ){
+                            navController.navigate(Routes.USER_DETAIL)
+                        }
                     }
                 }
             }
@@ -194,10 +201,12 @@ fun UserTabs(
 }
 
 @Composable
-fun UserItemUi(user: User) {
+fun UserItemUi(user: User, onUserClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth().background(White50, shape = RoundedCornerShape(12.dp))
-            .padding(vertical = 12.dp, horizontal = 16.dp)
+            .padding(vertical = 12.dp, horizontal = 16.dp).clickable{
+                onUserClick()
+            }
     ) {
         Column(
             modifier = Modifier.padding(end = 8.dp).width(60.dp)

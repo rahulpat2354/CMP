@@ -7,6 +7,7 @@ android-targetSdk = "36"
 
 # Language & Runtime
 coreSplashscreen = "1.2.0"
+filekit = "0.12.0"
 kermit = "2.0.8"
 kotlin = "2.2.20"
 kotlinx-coroutines = "1.10.2"
@@ -78,6 +79,12 @@ jetbrains-compose-navigation = { module ="org.jetbrains.androidx.navigation:navi
 material3-adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "adaptive" }
 material3-adaptive-layout = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout", version.ref = "adaptive" }
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+
+# file picker
+filekit-dialogs = { module = "io.github.vinceglb:filekit-dialogs", version.ref = "filekit" }
+filekit-dialogs-compose = { module = "io.github.vinceglb:filekit-dialogs-compose", version.ref = "filekit" }
+filekit-coil = { module = "io.github.vinceglb:filekit-coil", version.ref = "filekit" }
+
 # ===========================
 
 [plugins]

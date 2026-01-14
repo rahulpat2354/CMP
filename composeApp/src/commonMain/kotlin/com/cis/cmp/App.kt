@@ -13,9 +13,12 @@ import cmp.composeapp.generated.resources.ca
 import cmp.composeapp.generated.resources.gb
 import cmp.composeapp.generated.resources.img_screen_bg
 import cmp.composeapp.generated.resources.jp
+import coil3.ImageLoader
+import coil3.compose.setSingletonImageLoaderFactory
 import com.cis.cmp.core.theme.MyAppTheme
 import com.cis.cmp.di.appModules
 import com.cis.cmp.core.navigation.AppNavigation
+import io.github.vinceglb.filekit.coil.addPlatformFileSupport
 import kotlinx.datetime.IllegalTimeZoneException
 import kotlinx.datetime.LocalTime
 import kotlinx.datetime.TimeZone
@@ -29,6 +32,13 @@ import kotlin.time.ExperimentalTime
 @Composable
 @Preview
 fun App(countries: List<Country> = countries()) {
+    setSingletonImageLoaderFactory { context ->
+        ImageLoader.Builder(context)
+            .components {
+                addPlatformFileSupport()
+            }
+            .build()
+    }
     KoinApplication(application = {
         modules(appModules)
     }) {
