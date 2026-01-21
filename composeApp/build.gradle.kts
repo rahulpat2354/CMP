@@ -17,12 +17,15 @@ kotlin {
     }
 
     listOf(
+        iosX64(), // REQUIRED for Intel Mac simulators
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export(libs.koin.core)
         }
     }
     
@@ -38,6 +41,12 @@ kotlin {
             implementation(libs.androidx.core.splashscreen)
 
         }
+
+        // ADD THIS: iOS-specific dependencies
+        iosMain.dependencies {
+            implementation(libs.ktor.client.darwin) // iOS HTTP client
+        }
+
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(compose.foundation)
